@@ -57,7 +57,10 @@ def main():
     for i in range(total):
         seq = gen_rand(numbers, lower, upper)
         seq.sort()
-        print('{}:\t{}'.format(i + 1, seq))
+        print('{:2d}:\t[ '.format(i + 1), end='')
+        for elem in seq:
+            print('{:2d} '.format(elem), end='')
+        print(']')
 
 
 if __name__ == '__main__':
