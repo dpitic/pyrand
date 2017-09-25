@@ -1,5 +1,6 @@
 import getopt
 import sys
+import math
 from gen_rand import gen_rand
 
 """
@@ -54,14 +55,25 @@ def main():
         elif opt in ('-u', '--upper'):
             upper = int(arg)
 
+    # Sequence number output field width and format string
+    seq_width = int(math.log10(total)) + 1
+    seq_fmt = f"{{:{seq_width}d}}:\t[ "
+    # Sequence element output field width and format string
+    elem_width = int(math.log10(upper)) + 1
+    elem_fmt = f"{{:{elem_width}d}} "
+
     for i in range(total):
         seq = gen_rand(numbers, lower, upper)
         seq.sort()
-        print('{:2d}:\t[ '.format(i + 1), end='')
+        print(seq_fmt.format(i + 1), end='')
         for elem in seq:
-            print('{:2d} '.format(elem), end='')
+            print(elem_fmt.format(elem), end='')
         print(']')
 
 
 if __name__ == '__main__':
+    # This code uses formatted string literals (f-string) which are only
+    # supported in v3.6
+    assert sys.version_info.major >= 3, "Require Python >= v3.6"
+    assert sys.version_info.minor >= 6, "Require Python >= v3.6"
     main()
