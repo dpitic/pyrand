@@ -1,11 +1,12 @@
 import argparse
 import math
 import sys
-from gen_rand import gen_rand
+import more_itertools as mit
 
 """
-Script used to generate sets of random numbers based on os.urandom(). The sets
-are sorted in ascending order. This implementation uses the argparse module.
+Script used to generate sets of random numbers based on the more_itertools
+module. The sets are sorted in ascending order. This implementation uses the
+argparse module.
 """
 
 
@@ -32,8 +33,8 @@ def main():
 
     # Generate and output the random number sets to stdout
     for i in range(args.total):
-        seq = gen_rand(args.numbers, args.lower, args.upper)
-        seq.sort()
+        seq = mit.random_combination(
+            [i + 1 for i in range(args.lower - 1, args.upper)], args.numbers)
         print(f'{i+1:{seq_width}d}:\t[ ', end='')
         for elem in seq:
             print(f'{elem:{elem_width}d} ', end='')
