@@ -1,7 +1,9 @@
 import argparse
 import math
 import sys
+
 from gen_rand import gen_rand
+
 
 """
 Script used to generate sets of random numbers based on os.urandom(). The sets
@@ -33,7 +35,6 @@ def main():
     # Generate and output the random number sets to stdout
     for i in range(args.total):
         seq = gen_rand(args.numbers, args.lower, args.upper)
-        seq.sort()
         print(f'{i+1:{seq_width}d}:\t[ ', end='')
         for elem in seq:
             print(f'{elem:{elem_width}d} ', end='')
