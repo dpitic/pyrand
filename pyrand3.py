@@ -1,6 +1,7 @@
 import argparse
 import math
 import sys
+
 import more_itertools as mit
 
 """
@@ -33,8 +34,8 @@ def main():
 
     # Generate and output the random number sets to stdout
     for i in range(args.total):
-        seq = mit.random_combination(
-            [i + 1 for i in range(args.lower - 1, args.upper)], args.numbers)
+        seq = mit.random_combination(range(args.lower, args.upper + 1),
+                                     args.numbers)
         print(f'{i+1:{seq_width}d}:\t[ ', end='')
         for elem in seq:
             print(f'{elem:{elem_width}d} ', end='')
