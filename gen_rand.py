@@ -3,8 +3,9 @@ import random
 
 def gen_rand(numbers=6, start=1, stop=45):
     """
-    Generate a set of random numbers based on os.urandom() from the Python
-    random module.
+    Generate a set of random numbers based on os.urandom() function from the
+    Python standard library random module, and return as list sorted in
+    ascending order.
     :param numbers: Number of elements in the list.
     :param start: Lower bound random number (inclusive).
     :param stop: Upper bound random number (inclusive).
@@ -15,6 +16,4 @@ def gen_rand(numbers=6, start=1, stop=45):
     while len(rnd_set) < numbers:
         rnd = rnd_gen.randint(start, stop)
         rnd_set.add(rnd)
-    rnd_seq = list(rnd_set)
-    rnd_seq.sort()
-    return rnd_seq
+    return sorted(list(rnd_set))

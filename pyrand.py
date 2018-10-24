@@ -16,6 +16,7 @@ def usage():
     """
     print('Usage: pyrand.py [OPTION]')
     print('Generate sets of random numbers sorted in ascending order.')
+    print('This implementation uses os.urandom() standard library function.')
     print()
     print('Optional arguments:')
     print('\t-t, --total=1\ttotal number of sets to produce.')
@@ -55,25 +56,22 @@ def main():
         elif opt in ('-u', '--upper'):
             upper = int(arg)
 
-    # Sequence number output field width and format string
+    # Sequence number output field width for format string
     seq_width = int(math.log10(total)) + 1
-    seq_fmt = f"{{:{seq_width}d}}:\t[ "
-    # Sequence element output field width and format string
+    # Sequence element output field width for format string
     elem_width = int(math.log10(upper)) + 1
-    elem_fmt = f"{{:{elem_width}d}} "
 
     for i in range(total):
         seq = gen_rand(numbers, lower, upper)
-        seq.sort()
-        print(seq_fmt.format(i + 1), end='')
+        print(f'{i+1:{seq_width}d}:\t[ ', end='')
         for elem in seq:
-            print(elem_fmt.format(elem), end='')
+            print(f'{elem:{elem_width}d} ', end='')
         print(']')
 
 
 if __name__ == '__main__':
     # This code uses formatted string literals (f-string) which are only
-    # supported in v3.6
+    # supported in v3.6 and above.
     assert sys.version_info.major >= 3, "Require Python >= v3.6"
     assert sys.version_info.minor >= 6, "Require Python >= v3.6"
     main()

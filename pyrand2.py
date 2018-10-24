@@ -1,9 +1,7 @@
 import argparse
 import math
 import sys
-
 from gen_rand import gen_rand
-
 
 """
 Script used to generate sets of random numbers based on os.urandom(). The sets
@@ -14,8 +12,9 @@ are sorted in ascending order. This implementation uses the argparse module.
 def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(
-        description='''Generate sets of random
-    numbers sorted in ascending order.''',
+        description='''Generate sets of consecutive random numbers between
+        specified bounds, sorted in ascending order.  This implementation uses
+        os.urandom() standard library function.''',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-t', '--total', type=int, default=1,
                         help='total number of sets to produce.')
@@ -27,9 +26,9 @@ def main():
                         help='upper bound (inclusive) random number.')
     args = parser.parse_args()
 
-    # Sequence number output field width and format string
+    # Sequence number output field width for format string
     seq_width = int(math.log10(args.total)) + 1
-    # Sequence element output field width and format string
+    # Sequence element output field width for format string
     elem_width = int(math.log10(args.upper)) + 1
 
     # Generate and output the random number sets to stdout
@@ -43,7 +42,7 @@ def main():
 
 if __name__ == '__main__':
     # This code uses formatted string literals (f-string) which are only
-    # supported in v3.6
+    # supported in v3.6 and above.
     assert sys.version_info.major >= 3, "Require Python >= v3.6"
     assert sys.version_info.minor >= 6, "Require Python >= v3.6"
     main()
