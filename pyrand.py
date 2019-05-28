@@ -1,22 +1,22 @@
+"""
+Script used to generate sets of random numbers based on os.urandom() through
+the custom gen_rand module. The sets are sorted in ascending order. This
+implementation uses the getopt module.
+"""
 import getopt
-import sys
 import math
-from gen_rand import gen_rand
+import sys
 
-"""
-Script used to generate sets of random numbers based on os.urandom(). The sets
-are sorted in ascending order. This implementation uses the getopt module.
-"""
+from gen_rand import gen_rand
 
 
 def usage():
-    """
-    Display the command line argument usage.
-    :return: None
-    """
-    print('Usage: pyrand.py [OPTION]')
+    """Display the command line argument usage."""
+    print('Usage: pyrand.py [OPTION]\n')
     print('Generate sets of random numbers sorted in ascending order.')
-    print('This implementation uses os.urandom() standard library function.')
+    print('This implementation uses os.urandom() standard library function')
+    print('through a custom function implemented in the custom gen_rand')
+    print('module, and the Python standard library getopt module.')
     print()
     print('Optional arguments:')
     print('\t-t, --total=1\ttotal number of sets to produce.')
@@ -28,11 +28,11 @@ def usage():
 
 
 def main():
+    """Script entry point."""
     try:
-        opts, args = getopt.getopt(sys.argv[1:],
-                                   't:n:l:u:h',
-                                   ['total=', 'numbers=', 'lower=', 'upper=',
-                                    'help'])
+        opts, args = getopt.getopt(
+            sys.argv[1:], 't:n:l:u:h',
+            ['total=', 'numbers=', 'lower=', 'upper=', 'help'])
     except getopt.GetoptError as err:
         print(err)
         usage()

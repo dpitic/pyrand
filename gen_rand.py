@@ -1,11 +1,19 @@
+"""
+This module implements a function that returns a set of random numbers.  The
+implementation is based on the random.SystemRandom class that uses the
+os.urandom() function for generating random numbers from sources provided by
+the operating system.
+"""
 import random
 
 
 def gen_rand(numbers=6, start=1, stop=45):
-    """
+    """Return a set of random numbers sorted in ascending order.
+
     Generate a set of random numbers based on os.urandom() function from the
-    Python standard library random module, and return as list sorted in
-    ascending order.
+    Python standard library random.SystemRandom class, and return as a list
+    sorted in ascending order.
+
     :param numbers: Number of elements in the list.
     :param start: Lower bound random number (inclusive).
     :param stop: Upper bound random number (inclusive).

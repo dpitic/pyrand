@@ -1,13 +1,12 @@
 """
-Script used to generate sets of random numbers based on os.urandom(), using
-custom gen_rand module which uses the random.SystemRandom class. The sets
-are sorted in ascending order. This implementation uses the argparse module.
+Script used to generate sets of random numbers based on the Python standard
+library secrets module. The sets are sorted in ascending order. This
+implementation uses the argparse module.
 """
 import argparse
 import math
+import secrets
 import sys
-
-from gen_rand import gen_rand
 
 
 def main():
@@ -16,8 +15,8 @@ def main():
     parser = argparse.ArgumentParser(
         description='''Generate sets of consecutive random numbers between
         specified bounds, sorted in ascending order.  This implementation uses
-        os.urandom() standard library function from the random.SystemRandom
-        class, via the custom gen_rand module.''',
+        Python standard library secrets module, which generates secure
+        random numbers.''',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('-t',
                         '--total',
@@ -46,11 +45,17 @@ def main():
     # Sequence element output field width for format string
     elem_width = int(math.log10(args.upper)) + 1
 
+    # Secure random number generator
+    srng = secrets.SystemRandom()
+
     # Generate and output the random number sets to stdout
     for i in range(args.total):
-        seq = gen_rand(args.numbers, args.lower, args.upper)
+        # Population sequence
+        pop_seq = range(args.lower, args.upper + 1)
+        # sample(): random sampling without replacement, sorted ascending
+        sample_seq = sorted(srng.sample(pop_seq, args.numbers))
         print(f'{i+1:{seq_width}d}:\t[ ', end='')
-        for elem in seq:
+        for elem in sample_seq:
             print(f'{elem:{elem_width}d} ', end='')
         print(']')
 

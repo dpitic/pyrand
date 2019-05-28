@@ -1,29 +1,41 @@
-import argparse
-import math
-import sys
-import random
-
 """
-Script used to generate sets of random numbers based on the Python standard
-library random module. The sets are sorted in ascending order. This
+Script used to generate sets of pseudo-random numbers based on the Python
+standard library random module. The sets are sorted in ascending order. This
 implementation uses the argparse module.
 """
+import argparse
+import math
+import random
+import sys
 
 
 def main():
+    """Script entry function."""
     # Parse command line arguments
     parser = argparse.ArgumentParser(
-        description='''Generate sets of consecutive random numbers between
-        specified bounds, sorted in ascending order.  This implementation uses
-        Python standard library random module.''',
+        description='''Generate sets of consecutive pseudo-random numbers
+        between specified bounds, sorted in ascending order.  This
+        implementation uses Python standard library random module.''',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('-t', '--total', type=int, default=1,
+    parser.add_argument('-t',
+                        '--total',
+                        type=int,
+                        default=1,
                         help='total number of sets to produce.')
-    parser.add_argument('-n', '--numbers', type=int, default=6,
+    parser.add_argument('-n',
+                        '--numbers',
+                        type=int,
+                        default=6,
                         help='number of elements in the set.')
-    parser.add_argument('-l', '--lower', type=int, default=1,
+    parser.add_argument('-l',
+                        '--lower',
+                        type=int,
+                        default=1,
                         help='lower bound (inclusive) random number.')
-    parser.add_argument('-u', '--upper', type=int, default=45,
+    parser.add_argument('-u',
+                        '--upper',
+                        type=int,
+                        default=45,
                         help='upper bound (inclusive) random number.')
     args = parser.parse_args()
 
@@ -32,12 +44,14 @@ def main():
     # Sequence element output field width for format string
     elem_width = int(math.log10(args.upper)) + 1
 
-    # Generate and output the random number sets to stdout
+    # Generate and output the pseudo-random number sets to stdout
     for i in range(args.total):
-        seq = sorted(
-            random.sample(range(args.lower, args.upper + 1), args.numbers))
+        # Population sequence
+        pop_seq = range(args.lower, args.upper + 1)
+        # Sample sequence, sorted, without replacement
+        sample_seq = sorted(random.sample(pop_seq, args.numbers))
         print(f'{i+1:{seq_width}d}:\t[ ', end='')
-        for elem in seq:
+        for elem in sample_seq:
             print(f'{elem:{elem_width}d} ', end='')
         print(']')
 
