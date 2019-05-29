@@ -1,0 +1,34 @@
+* Python secure random number generator
+
+Series of Python scripts used to generate sequences of random numbers, using
+random number generators based on different implementations.
+
+** Pyrand
+
+Script used to generate sets of random numbers based on =os.urandom()=
+through the custom =gen_rand= module. The sets are sorted in ascending
+order.  This implementation uses the =getopt= module.
+
+** Pyrand2
+
+Script used to generate sets of random numbers based on =os.urandom()=,
+using custom =gen_rand= module which uses the =random.SystemRandom= class.
+The sets are sorted in ascending order. This implementation uses the
+=argparse= module.
+
+** Pyrand3
+
+*This script generates pseudo-random number sequences*
+
+Script used to generate sets of *pseudo-random* numbers based on the Python
+standard library =random= module. The sets are sorted in ascending order.
+This implementation uses the =argparse= module.
+
+** Pyrand4
+
+Script used to generate sets of random numbers based on the Python standard
+library =secrets= module. The sets are sorted in ascending order. This
+implementation uses the =argparse= module.
+
+On Manjaro Linux, it was found this implementation used the same Python
+Standard Library =random.SystemRandom= object.

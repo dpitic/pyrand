@@ -52,7 +52,7 @@ def main():
     for i in range(args.total):
         # Population sequence
         pop_seq = range(args.lower, args.upper + 1)
-        # sample(): random sampling without replacement, sorted ascending
+        # Random sampling without replacement, sorted ascending
         sample_seq = sorted(srng.sample(pop_seq, args.numbers))
         print(f'{i+1:{seq_width}d}:\t[ ', end='')
         for elem in sample_seq:
